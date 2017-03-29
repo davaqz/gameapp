@@ -1,4 +1,4 @@
-# project/test.py
+# gameapp/tests/test_games.py
 
 import unittest
 
