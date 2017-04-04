@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% from "_form_macros.html" import render_field %}
+
+{% block content %}
+
+<div class="add-game">
+
+<div class="page-header">
+
+<h2>Add a New Game</h2>
+
+</div>
+
+
+
+<form action="{{ url_for('games.add_game') }}" method="post">
+	{{ form.csrf_token }}
+	<dl>	
+		{{ render_field(form.game_title, placeholder="Enter Game Title") }}
+		{{ render_field(form.game_description, placeholder="Enter Game Description") }}
+	</dl>
+	
+	<button class="btn btn-sm btn-success" type="submit">Add Game</button>
+</form>
+
+</div>
+
+{% endblock %}
