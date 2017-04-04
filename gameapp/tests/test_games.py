@@ -23,8 +23,6 @@ class ProjectTests(unittest.TestCase):
 
 	def test_main_page(self):
 		response = self.app.get('/', follow_redirects=True)
-		self.assertIn(b'Welcome to the Gameboy Club!', response.data)
-		self.assertIn(b'This site will contain information about the Nintendo Gameboy handheld system!', response.data)
 		self.assertIn(b'Systems', response.data)
 		self.assertIn(b'Cartridges', response.data)
 		self.assertIn(b'Accessories', response.data)
