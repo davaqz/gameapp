@@ -1,4 +1,4 @@
-# gameapp/forms.py
+# gameapp/games/forms.py
 
 from flask_wtf import FlaskForm
 from wtforms import StringField
