@@ -35,11 +35,9 @@ class ProjectTests(unittest.TestCase):
 
 	def test_main_page(self):
 		response = self.app.get('/', follow_redirects=True)
-		self.assertIn(b'Systems', response.data)
-		self.assertIn(b'Cartridges', response.data)
-		self.assertIn(b'Accessories', response.data)
-		self.assertIn(b'Books', response.data)
-		self.assertIn(b'Add Game', response.data)
+		self.assertIn(b'Nintendo Gameboy Club', response.data)
+		self.assertIn(b'Register', response.data)
+		self.assertIn(b'Log In', response.data)
 
 	def test_main_page_query_results(self):
 		response = self.app.get('/add', follow_redirects=True)
