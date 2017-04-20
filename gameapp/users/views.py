@@ -7,9 +7,11 @@
 from flask import render_template, Blueprint, request, redirect, url_for, flash
 from sqlalchemy.exc import IntegrityError
 from flask_login import login_user, current_user, login_required, logout_user
+from flask_mail import Message
+from threading import Thread
 
 from .forms import RegisterForm, LoginForm
-from gameapp import db
+from gameapp import db, mail, app
 from gameapp.models import User
 
 ##############
@@ -17,6 +19,22 @@ from gameapp.models import User
 ##############
 
 users_blueprint = Blueprint('users', __name__)
+
+
+##########################
+#### helper functions ####
+##########################
+
+def send_async_email(msg):
+    with app.app_context():
+        mail.send(msg)
+
+def send_email(subject, recipients, text_body, html_body):
+    msg = Message(subject, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    thr = Thread(target=send_async_email, args=[msg])
+    thr.start()
 
 ##############
 ####routes####
@@ -32,6 +50,12 @@ def register():
                 new_user.authenticated = True
                 db.session.add(new_user)
                 db.session.commit()
+
+                send_email('Register',
+                    ['davaqz@gmail.com'],
+                    'Thanks for registering with Nintendo Gameboy Club!',
+                    '<h3>Thanks for registering with Nintendo Gameboy Club</h3>')
+
                 flash('Thanks for registering!', 'success')
                 return redirect(url_for('games.index'))
             except IntegrityError:
