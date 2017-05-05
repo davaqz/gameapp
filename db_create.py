@@ -19,7 +19,7 @@ db.session.add(game3)
 db.session.commit()
 
 # insert user data
-user1 = User('davaqz@gmail.com', 'password1234')
+user1 = User('davaqz@aol.com', 'password1234')
 user2 = User('davaqz@hotmail.com', 'PaSsWoRd')
 user3 = User('davaqz@yahoo.com', 'MyFavPassword')
 db.session.add(user1)
